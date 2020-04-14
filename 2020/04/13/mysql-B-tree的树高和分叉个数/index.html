@@ -14,14 +14,14 @@
     
     
         
-            <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+            <link rel="alternate" type="application/atom+xml" title="RSS" href="/child/atom.xml">
         
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"mypic.jpg"},"articleBody":"mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。拿主键索引树举例，1、如果主键为int 占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（4+8） 约等于1300， 此时分叉数约为1300当树高为3时， 可存储数据条数 1300^3 =21970000002、如果主键为bigint 占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（8+8） 约等于1000， 此时分叉数约为1000当树高为3时， 可存储数据条数 1000^3 =1000000000   ，即为10亿条所以可以看出， 通常innodb 遍历索引树，最多遍历2～3层索引树，即可得到结果。\n","dateCreated":"2020-04-13T17:01:43+08:00","dateModified":"2020-04-13T17:21:47+08:00","datePublished":"2020-04-13T17:01:43+08:00","description":"","headline":"mysql B+tree的树高和分叉个数","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/"},"publisher":{"@type":"Organization","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"mypic.jpg","logo":{"@type":"ImageObject","url":"mypic.jpg"}},"url":"http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/","keywords":"mysql 索引"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"mypic.jpg"},"articleBody":"mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。拿主键索引树举例，1、如果主键为int 占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（4+8） 约等于1300， 此时分叉数约为1300当树高为3时， 可存储数据条数 1300^3 =21970000002、如果主键为bigint 占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（8+8） 约等于1000， 此时分叉数约为1000当树高为3时， 可存储数据条数 1000^3 =1000000000   ，即为10亿条所以可以看出， 通常innodb 遍历索引树，最多遍历2～3层索引树，即可得到结果。\n","dateCreated":"2020-04-13T17:01:43+08:00","dateModified":"2020-04-13T17:21:47+08:00","datePublished":"2020-04-13T17:01:43+08:00","description":"","headline":"mysql B+tree的树高和分叉个数","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://iushas.github.io/child/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/"},"publisher":{"@type":"Organization","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"mypic.jpg","logo":{"@type":"ImageObject","url":"mypic.jpg"}},"url":"http://iushas.github.io/child/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/","keywords":"mysql 索引"}</script>
     <meta name="description" content="mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。拿主键索引树举例，1、如果主键为int 占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB&#x2F;（4+8） 约等于1300， 此时分叉数约为1300当树高为3时， 可存储数据条数 1300^3 &#x3D;21970000002、如果主键为bigint 占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="mysql B+tree的树高和分叉个数">
-<meta property="og:url" content="http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/index.html">
+<meta property="og:url" content="http://iushas.github.io/child/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/index.html">
 <meta property="og:site_name" content="tanic&#39;s blog">
 <meta property="og:description" content="mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。拿主键索引树举例，1、如果主键为int 占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB&#x2F;（4+8） 约等于1300， 此时分叉数约为1300当树高为3时， 可存储数据条数 1300^3 &#x3D;21970000002、如果主键为bigint 占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存">
 <meta property="og:locale" content="zh_CN">
@@ -35,14 +35,14 @@
         
     
     
-        <meta property="og:image" content="http://iushas.github.io/assets/images/mypic.jpg"/>
+        <meta property="og:image" content="http://iushas.github.io/child/assets/images/mypic.jpg"/>
     
     
     
     
     <!--STYLES-->
     
-<link rel="stylesheet" href="/assets/css/style-acw6g2bgnusahgwzakpo3tluwxpj0vt0ur64apnicjkd5zp3qcgvzpbfkupo.min.css">
+<link rel="stylesheet" href="/child/assets/css/style-acw6g2bgnusahgwzakpo3tluwxpj0vt0ur64apnicjkd5zp3qcgvzpbfkupo.min.css">
 
     <!--STYLES END-->
     
@@ -52,7 +52,7 @@
     
         
             
-<link rel="stylesheet" href="/assets/css/gitalk.css">
+<link rel="stylesheet" href="/child/assets/css/gitalk.css">
 
         
     
@@ -74,7 +74,7 @@
     <div class="header-title">
         <a
             class="header-title-link"
-            href="/%20"
+            href="/child/%20"
             aria-label=""
         >
             tanic&#39;s blog
@@ -85,11 +85,11 @@
             <a
                 class="header-right-picture "
                 href="#about"
-                aria-label="打开链接: /#about"
+                aria-label="打开链接: /child/#about"
             >
         
         
-            <img class="header-picture" src="/assets/images/mypic.jpg" alt="作者的图片"/>
+            <img class="header-picture" src="/child/assets/images/mypic.jpg" alt="作者的图片"/>
         
         </a>
     
@@ -107,10 +107,10 @@
         
             <div class="sidebar-profile">
                 <a
-                    href="/#about"
+                    href="/child/#about"
                     aria-label="阅读有关作者的更多信息"
                 >
-                    <img class="sidebar-profile-picture" src="/assets/images/mypic.jpg" alt="作者的图片"/>
+                    <img class="sidebar-profile-picture" src="/child/assets/images/mypic.jpg" alt="作者的图片"/>
                 </a>
                 <h4 class="sidebar-profile-name">Xiao Tengkun</h4>
                 
@@ -126,7 +126,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/"
+                            href="/child/"
                             
                             rel="noopener"
                             title="首页"
@@ -140,7 +140,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/all-categories"
+                            href="/child/all-categories"
                             
                             rel="noopener"
                             title="分类"
@@ -154,7 +154,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/all-tags"
+                            href="/child/all-tags"
                             
                             rel="noopener"
                             title="标签"
@@ -168,7 +168,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/all-archives"
+                            href="/child/all-archives"
                             
                             rel="noopener"
                             title="归档"
@@ -266,7 +266,7 @@
                     
                         <a
                             class="sidebar-button-link "
-                            href="/atom.xml"
+                            href="/child/atom.xml"
                             
                             rel="noopener"
                             title="RSS"
@@ -324,7 +324,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/mysql-%E7%B4%A2%E5%BC%95/" rel="tag">mysql 索引</a>
+    <a class="tag tag--primary tag--small t-link" href="/child/tags/mysql-%E7%B4%A2%E5%BC%95/" rel="tag">mysql 索引</a>
 
             </div>
         
@@ -348,7 +348,7 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2020/04/13/hello-world/"
+                    href="/child/2020/04/13/hello-world/"
                     data-tooltip="Hello World"
                     aria-label="下一篇: Hello World"
                 >
@@ -364,7 +364,7 @@
             <a
                 class="post-action-btn btn btn--default btn-open-shareoptions"
                 href="#btn-open-shareoptions"
-                aria-label="Diesen Beitrag teilen"
+                aria-label="Share this post"
             >
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
@@ -376,7 +376,7 @@
                     <a
                         class="post-action-btn btn btn--default"
                         href="#gitalk"
-                        aria-label="Kommentieren"
+                        aria-label="Leave a comment"
                     >
                         <i class="fa fa-comment"></i>
                     </a>
@@ -385,7 +385,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -434,7 +434,7 @@
                     
                 <a
                     class="post-action-btn btn btn--default tooltip--top"
-                    href="/2020/04/13/hello-world/"
+                    href="/child/2020/04/13/hello-world/"
                     data-tooltip="Hello World"
                     aria-label="下一篇: Hello World"
                 >
@@ -450,7 +450,7 @@
             <a
                 class="post-action-btn btn btn--default btn-open-shareoptions"
                 href="#btn-open-shareoptions"
-                aria-label="Diesen Beitrag teilen"
+                aria-label="Share this post"
             >
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </a>
@@ -462,7 +462,7 @@
                     <a
                         class="post-action-btn btn btn--default"
                         href="#gitalk"
-                        aria-label="Kommentieren"
+                        aria-label="Leave a comment"
                     >
                         <i class="fa fa-comment"></i>
                     </a>
@@ -471,7 +471,7 @@
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -498,7 +498,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="/assets/images/mypic.jpg" alt="作者的图片"/>
+            <img id="about-card-picture" src="/child/assets/images/mypic.jpg" alt="作者的图片"/>
         
             <h4 id="about-card-name">Xiao Tengkun</h4>
         
@@ -530,7 +530,7 @@
             <span class="close-button"><i class="fa fa-times"></i></span>
             <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
                 <span class="searchby-algolia-text text-color-light text-small">by</span>
-                <img class="searchby-algolia-logo" src="/assets/images/logo-algolia-nebula-blue-full.svg">
+                <img class="searchby-algolia-logo" src="/child/assets/images/logo-algolia-nebula-blue-full.svg">
             </a>
             <i class="search-icon fa fa-search"></i>
             <form id="algolia-search-form">
@@ -548,7 +548,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://iushas.github.io/2020/04/13/hello-world/"
+                            href="http://iushas.github.io/child/2020/04/13/hello-world/"
                             aria-label=": Hello World"
                         >
                             <h3 class="media-heading">Hello World</h3>
@@ -571,7 +571,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/"
+                            href="http://iushas.github.io/child/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/"
                             aria-label=": mysql B+tree的树高和分叉个数"
                         >
                             <h3 class="media-heading">mysql B+tree的树高和分叉个数</h3>
@@ -604,17 +604,17 @@
 
         
         
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+<div id="cover" style="background-image:url('/child/assets/images/cover.jpg');"></div>
         <!--SCRIPTS-->
 
-<script src="/assets/js/script-kkq8afuwdqyt9xabqiwwwglshefdyvgqpmtc998rc2kmr8d40fr3y8br71mc.min.js"></script>
+<script src="/child/assets/js/script-kkq8afuwdqyt9xabqiwwwglshefdyvgqpmtc998rc2kmr8d40fr3y8br71mc.min.js"></script>
 
 <!--SCRIPTS END-->
 
 
     
         
-<script src="/assets/js/gitalk.js"></script>
+<script src="/child/assets/js/gitalk.js"></script>
 
         <script type="text/javascript">
           (function() {
@@ -634,10 +634,10 @@
 
 
     
-<script src="/assets/js/moment-with-locales.js"></script>
+<script src="/child/assets/js/moment-with-locales.js"></script>
 
     
-<script src="/assets/js/algoliasearch.js"></script>
+<script src="/child/assets/js/algoliasearch.js"></script>
 
     <script>
       var algoliaClient = algoliasearch('Z7A3XW4R2I', '12db1ad54372045549ef465881c17e743');
