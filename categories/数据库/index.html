@@ -317,8 +317,11 @@
             </div>
             
                 <div class="postShorten-content">
-                    <p>mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。<br>拿主键索引树举例，<br>1、如果主键为int 占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（4+8） 约等于1300， 此时分叉数约为1300<br>当树高为3时， 可存储数据条数 1300^3 =2197000000<br>2、如果主键为bigint 占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（8+8） 约等于1000， 此时分叉数约为1000<br>当树高为3时， 可存储数据条数 1000^3 =1000000000   ，即为10亿条<br>所以可以看出， 通常innodb 遍历索引树，最多遍历2～3层索引树，即可得到结果。</p>
-
+                    <h3 id="mysql的索引按照页来存储，-目前大多数操作系统，一个页的大小为16KB。"><a href="#mysql的索引按照页来存储，-目前大多数操作系统，一个页的大小为16KB。" class="headerlink" title="mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。"></a>mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。</h3><p>拿主键索引树举例，</p>
+<h3 id="如果主键为int"><a href="#如果主键为int" class="headerlink" title="如果主键为int"></a>如果主键为int</h3><pre><code>占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（4+8） 约等于1300， 此时分叉数约为1300
+当树高为3时， 可存储数据条数 1300^3 =2197000000</code></pre><h3 id="如果主键为bigint"><a href="#如果主键为bigint" class="headerlink" title="如果主键为bigint"></a>如果主键为bigint</h3><pre><code>占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（8+8） 约等于1000， 此时分叉数约为1000
+当树高为3时， 可存储数据条数 1000^3 =1000000000 ，即为10亿条
+所以可以看出， 通常innodb 遍历索引树，最多遍历2～3层索引树，即可得到结果。</code></pre>
                     
                         
 
@@ -466,6 +469,29 @@
                     <hr>
                 </div>
                 
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a
+                            class="link-unstyled"
+                            href="http://iushas.github.io/2020/04/15/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/"
+                            aria-label=": 记一次腾讯面试的几个小问题"
+                        >
+                            <h3 class="media-heading">记一次腾讯面试的几个小问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2020年4月15日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
             </div>
         </div>
         <div class="modal-footer">
@@ -473,7 +499,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 2 篇文章
+                找到 3 篇文章
             </p>
         </div>
     </div>
