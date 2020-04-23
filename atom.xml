@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://iushas.github.io/"/>
-  <updated>2020-04-15T03:51:34.754Z</updated>
+  <updated>2020-04-23T02:14:13.272Z</updated>
   <id>http://iushas.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>记一次腾讯面试的几个小问题</title>
+    <title>几个小问题</title>
     <link href="http://iushas.github.io/2020/04/15/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
     <id>http://iushas.github.io/2020/04/15/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%85%BE%E8%AE%AF%E9%9D%A2%E8%AF%95%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B0%8F%E9%97%AE%E9%A2%98/</id>
     <published>2020-04-15T02:15:59.000Z</published>
-    <updated>2020-04-15T03:51:34.754Z</updated>
+    <updated>2020-04-23T02:14:13.272Z</updated>
     
     <content type="html"><![CDATA[<p>1、高可用的切换时机</p><p>如何确定数据库不可用了</p><p>2、如何检测磁盘是否有块损坏</p><p>3、机器上存在很多time_wait 状态的连接，产生原因，以及如何处理</p><p>产生原因：</p><p>4、goroutine 和线程的区别</p><p>5、</p>]]></content>
     
