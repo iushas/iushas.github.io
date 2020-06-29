@@ -293,6 +293,165 @@
                     
                         <a
                             class="link-unstyled"
+                            href="/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/"
+                            aria-label=": redis学习笔记-redis cluster 故障恢复流程"
+                        >
+                            redis学习笔记-redis cluster 故障恢复流程
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-06-29T15:33:17+08:00">
+	
+		    6月 29, 2020
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>, <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/">redis</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <p>#redis#</p>
+<ol>
+<li><p>判断节点宕机</p>
+<pre><code>* 主观下线：pfail， 断开 &gt; cluster-node-timeout 默认15000ms 
+* 客观下线：fail， cluster-node-timeout*2 时间内， 有超过半数节点pfail， 则标记为fail</code></pre></li>
+<li><p>从节点资格检查<br>对宕机的主节点，选择有资格切换的slave节点， 判断条件为从节点最后一次与主节点通信的时间间隔， 如果小于 cluster-node-timeout<em>cluster-slave-validity-factor(默认为15s</em>10) ,那么就有资格</p>
+</li>
+<li><p>设置从节点的延迟选举时间<br>对所有从节点进行排序,slave priority, 每个从节点根据自己对master复制数据的offset设置选举时间， offset越大，表明复制数据越多， 选举时间越靠前，优先进行选举<br><img src="redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/68E07640-EC0C-4A28-AB81-9FC494E14703.png" alt=""></p>
+</li>
+<li><p>从节点发起选举流程<br>从节点定时任务检测= failover_auth_time (故障选举时间) 后，发起选举流程</p>
+</li>
+</ol>
+<ul>
+<li>更新配置纪元<br>保存在clusterState.failover_auth_epoch  结构体变量里</li>
+<li>广播选举消息<br>FAILOVER_AUTH_REQUEST,保证该从节点在一个配置纪元内只能发起一次选举</li>
+</ul>
+<ol start="5">
+<li>主节点选举投票<br>只有持有槽的主节点才能处理FAILOVER_AUTH_REQUEST消息， 给从节点投票。当某个从节点收集到N/2 +1 个持有槽的主节点投票时， 从节点可以执行替换故障主节点的操作。<br><img src="redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/5DDB4A99-141D-4620-A34E-A57609C6A54F.png" alt=""><blockquote>
+<p>注意事项：<br>1、故障节点也算在N里面，所以要注意主节点的部署分布问题，有可能从节点一直拿不到N/2+1个选票<br>2、投票作废。 一个配置纪元代表一次选举周期，开始投票后的cluster-node-timeout*2 时间内，从节点没有获取到足够票数，则本次选举作废，从节点对配置纪元自增并发起下一轮投票  </p>
+</blockquote>
+</li>
+</ol>
+<ol start="6">
+<li>替换主节点<br>收到N/2+1个选票的从节点发起替换主节点操作：</li>
+</ol>
+<ul>
+<li>当前从节点取消复制，变为主节点</li>
+<li>执行clusterDelSlot操作撤销故障主节点负责的槽， 并执行clusterAddSlot把这些槽委派给自己</li>
+<li>向集群广播自己的pong消息，通知集群内所有的节点当前从节点变为乐主节点卡并接管了故障主节点的槽信息</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
+                            href="/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BD%BF%E7%94%A8redis%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"
+                            aria-label=": redis学习笔记-使用redis注意事项"
+                        >
+                            redis学习笔记-使用redis注意事项
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2020-06-29T15:24:17+08:00">
+	
+		    6月 29, 2020
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>, <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/">redis</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="普通命令注意"><a href="#普通命令注意" class="headerlink" title="普通命令注意"></a>普通命令注意</h2><ul>
+<li>在使用 rename 命令的时候。由于重命名键期间会执行del命令删除旧的键，如果键对应的值比较大，会存在阻塞Redis的可能性，这点不要忽视。rename = del (old key) + rename (newkey)</li>
+</ul>
+<ul>
+<li>Redis 不支持二级数据结构（例如哈希、列表）内部元素的过期功能。</li>
+<li>append、setrange等命令会造成内存预分配，导致内存占用增加一倍， 尽量用set<h2 id="集群redis-cluster功能限制"><a href="#集群redis-cluster功能限制" class="headerlink" title="集群redis-cluster功能限制"></a>集群redis-cluster功能限制</h2></li>
+<li>key批量操作支持有限，如mget和mset，目前只支持具有<strong>相同slot值</strong>的key批量操作。</li>
+<li>key事务操作支持有限，只支持多key在同一节点上的事务操作，当多个key分布在不同的节点上时无法使用事务功能</li>
+<li>key作为数据分区的最小粒度，不能将一个大的键值对象如hash、list映射到不同节点</li>
+<li>不支持多数据库，只能使用一个数据库空间，db0</li>
+<li>复制结构只支持一层， 即从节点只能复制主节点，不支持嵌套树状复制结构</li>
+<li>当节点通信失败时间大于cluster-node-time（默认15000 =15s）时，会被标记为主观下线， 被超过半数的节点标记为主观下线则进行客观下线。 但是cluster-node-time*2 的时间内，每个节点自己的下线报告如果没有得到更新，那么下线报告会被删除，即得不到超过半数节点的主观下线标记。<br>所以cluster-node-time 不要设置的过小，否则主观下线的速度赶不上下线报告的过期速度， 故障节点将永远无法被标记为客观下线，导致故障转移失败。<h2 id="redis-cluster关键参数"><a href="#redis-cluster关键参数" class="headerlink" title="redis-cluster关键参数"></a>redis-cluster关键参数</h2></li>
+<li>cluster-require-full-coverage  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no  当主节点不可用时，只影响主节点上的槽使用，整个集群在故障发现到转移期间其他节点仍可用</span><br><span class="line">yes 主节点不可用时，整个集群在故障发现到转移期间不可用</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+                    
+                        
+
+
+                    
+                    
+                        <p>
+                            <a
+                                href="/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BD%BF%E7%94%A8redis%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#post-footer"
+                                class="postShorten-excerpt_link link"
+                                aria-label=""
+                            >
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
+                        <a
+                            class="link-unstyled"
                             href="/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/"
                             aria-label=": mysql B+tree的树高和分叉个数"
                         >
@@ -498,7 +657,7 @@
                     <div class="media-body">
                         <a
                             class="link-unstyled"
-                            href="http://iushas.github.io/2020/06/22/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BD%BF%E7%94%A8redis%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"
+                            href="http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BD%BF%E7%94%A8redis%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"
                             aria-label=": redis学习笔记-使用redis注意事项"
                         >
                             <h3 class="media-heading">redis学习笔记-使用redis注意事项</h3>
@@ -506,7 +665,7 @@
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2020年6月22日
+                                    2020年6月29日
                                 
                             </span>
                         </span>
