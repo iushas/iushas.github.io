@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://iushas.github.io/"/>
-  <updated>2020-06-29T09:16:23.697Z</updated>
+  <updated>2020-06-29T11:56:40.943Z</updated>
   <id>http://iushas.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://iushas.github.io/2020/06/29/test/"/>
+    <id>http://iushas.github.io/2020/06/29/test/</id>
+    <published>2020-06-29T11:44:32.000Z</published>
+    <updated>2020-06-29T11:56:40.943Z</updated>
+    
+    <content type="html"><![CDATA[<p>nihao adfsafdas<br>adfasdf<br> sdfasdfasdf</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;nihao adfsafdas&lt;br&gt;adfasdf&lt;br&gt; sdfasdfasdf&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>redis学习笔记-redis cluster 故障恢复流程</title>
