@@ -17,7 +17,7 @@
             <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
         
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"https://imglf6.nosdn0.126.net/img/REhUYTdnYmRKL05ydFNNSWhtbU9GSzZpYWRiWHJjVUN2ME5GcHhIVk5WTnd2RC9vMW92N0Z3PT0.jpg?imageView&thumbnail=1000x0&type=jpg"},"articleBody":"mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。拿主键索引树举例，\n如果主键为int占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（4+8） 约等于1300， 此时分叉数约为1300\n当树高为3时， 可存储数据条数 1300^3 =2197000000如果主键为bigint占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（8+8） 约等于1000， 此时分叉数约为1000\n当树高为3时， 可存储数据条数 1000^3 =1000000000 ，即为10亿条\n所以可以看出， 通常innodb 遍历索引树，最多遍历2～3层索引树，即可得到结果。","dateCreated":"2020-04-13T17:01:43+08:00","dateModified":"2020-06-30T09:54:45+08:00","datePublished":"2020-04-13T17:01:43+08:00","description":"","headline":"mysql B+tree的树高和分叉个数","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/"},"publisher":{"@type":"Organization","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"https://imglf6.nosdn0.126.net/img/REhUYTdnYmRKL05ydFNNSWhtbU9GSzZpYWRiWHJjVUN2ME5GcHhIVk5WTnd2RC9vMW92N0Z3PT0.jpg?imageView&thumbnail=1000x0&type=jpg","logo":{"@type":"ImageObject","url":"https://imglf6.nosdn0.126.net/img/REhUYTdnYmRKL05ydFNNSWhtbU9GSzZpYWRiWHJjVUN2ME5GcHhIVk5WTnd2RC9vMW92N0Z3PT0.jpg?imageView&thumbnail=1000x0&type=jpg"}},"url":"http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/","keywords":"索引"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"mypic.jpg"},"articleBody":"mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。拿主键索引树举例，\n如果主键为int占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（4+8） 约等于1300， 此时分叉数约为1300\n当树高为3时， 可存储数据条数 1300^3 =2197000000如果主键为bigint占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB/（8+8） 约等于1000， 此时分叉数约为1000\n当树高为3时， 可存储数据条数 1000^3 =1000000000 ，即为10亿条\n所以可以看出， 通常innodb 遍历索引树，最多遍历2～3层索引树，即可得到结果。","dateCreated":"2020-04-13T17:01:43+08:00","dateModified":"2020-06-30T09:54:45+08:00","datePublished":"2020-04-13T17:01:43+08:00","description":"","headline":"mysql B+tree的树高和分叉个数","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/"},"publisher":{"@type":"Organization","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"mypic.jpg","logo":{"@type":"ImageObject","url":"mypic.jpg"}},"url":"http://iushas.github.io/2020/04/13/mysql-B-tree%E7%9A%84%E6%A0%91%E9%AB%98%E5%92%8C%E5%88%86%E5%8F%89%E4%B8%AA%E6%95%B0/","keywords":"索引"}</script>
     <meta name="description" content="mysql的索引按照页来存储， 目前大多数操作系统，一个页的大小为16KB。拿主键索引树举例， 如果主键为int占4个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16KB&#x2F;（4+8） 约等于1300， 此时分叉数约为1300 当树高为3时， 可存储数据条数 1300^3 &#x3D;2197000000如果主键为bigint占8个字节， 一个指针（64位系统）占8个字节， 则根结点可存储16K">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="mysql B+tree的树高和分叉个数">
@@ -35,7 +35,7 @@
         
     
     
-        <meta property="og:image" content="https://imglf6.nosdn0.126.net/img/REhUYTdnYmRKL05ydFNNSWhtbU9GSzZpYWRiWHJjVUN2ME5GcHhIVk5WTnd2RC9vMW92N0Z3PT0.jpg?imageView&amp;thumbnail=1000x0&amp;type=jpg"/>
+        <meta property="og:image" content="http://iushas.github.io/assets/images/mypic.jpg"/>
     
     
     
@@ -89,7 +89,7 @@
             >
         
         
-            <img class="header-picture" src="https://imglf6.nosdn0.126.net/img/REhUYTdnYmRKL05ydFNNSWhtbU9GSzZpYWRiWHJjVUN2ME5GcHhIVk5WTnd2RC9vMW92N0Z3PT0.jpg?imageView&amp;thumbnail=1000x0&amp;type=jpg" alt="作者的图片"/>
+            <img class="header-picture" src="/assets/images/mypic.jpg" alt="作者的图片"/>
         
         </a>
     
@@ -110,7 +110,7 @@
                     href="/#about"
                     aria-label="阅读有关作者的更多信息"
                 >
-                    <img class="sidebar-profile-picture" src="https://imglf6.nosdn0.126.net/img/REhUYTdnYmRKL05ydFNNSWhtbU9GSzZpYWRiWHJjVUN2ME5GcHhIVk5WTnd2RC9vMW92N0Z3PT0.jpg?imageView&amp;thumbnail=1000x0&amp;type=jpg" alt="作者的图片"/>
+                    <img class="sidebar-profile-picture" src="/assets/images/mypic.jpg" alt="作者的图片"/>
                 </a>
                 <h4 class="sidebar-profile-name">Xiao Tengkun</h4>
                 
@@ -513,7 +513,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="https://imglf6.nosdn0.126.net/img/REhUYTdnYmRKL05ydFNNSWhtbU9GSzZpYWRiWHJjVUN2ME5GcHhIVk5WTnd2RC9vMW92N0Z3PT0.jpg?imageView&amp;thumbnail=1000x0&amp;type=jpg" alt="作者的图片"/>
+            <img id="about-card-picture" src="/assets/images/mypic.jpg" alt="作者的图片"/>
         
             <h4 id="about-card-name">Xiao Tengkun</h4>
         
