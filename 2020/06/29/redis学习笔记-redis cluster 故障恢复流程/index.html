@@ -17,7 +17,7 @@
             <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
         
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"https://photos.google.com/photo/AF1QipMRiy0F-doId3BZVtny4HbYrgZ7JxujCdJPkd-N"},"articleBody":"#redis#\n\n判断节点宕机\n* 主观下线：pfail， 断开 &gt; cluster-node-timeout 默认15000ms \n* 客观下线：fail， cluster-node-timeout*2 时间内， 有超过半数节点pfail， 则标记为fail\n从节点资格检查对宕机的主节点，选择有资格切换的slave节点， 判断条件为从节点最后一次与主节点通信的时间间隔， 如果小于 cluster-node-timeoutcluster-slave-validity-factor(默认为15s10) ,那么就有资格\n\n设置从节点的延迟选举时间对所有从节点进行排序,slave priority, 每个从节点根据自己对master复制数据的offset设置选举时间， offset越大，表明复制数据越多， 选举时间越靠前，优先进行选举\n\n从节点发起选举流程从节点定时任务检测= failover_auth_time (故障选举时间) 后，发起选举流程\n\n\n\n更新配置纪元保存在clusterState.failover_auth_epoch  结构体变量里\n广播选举消息FAILOVER_AUTH_REQUEST,保证该从节点在一个配置纪元内只能发起一次选举\n\n\n主节点选举投票只有持有槽的主节点才能处理FAILOVER_AUTH_REQUEST消息， 给从节点投票。当某个从节点收集到N/2 +1 个持有槽的主节点投票时， 从节点可以执行替换故障主节点的操作。\n\n\n注意事项：1、故障节点也算在N里面，所以要注意主节点的部署分布问题，有可能从节点一直拿不到N/2+1个选票2、投票作废。 一个配置纪元代表一次选举周期，开始投票后的cluster-node-timeout*2 时间内，从节点没有获取到足够票数，则本次选举作废，从节点对配置纪元自增并发起下一轮投票  \n\n\n替换主节点收到N/2+1个选票的从节点发起替换主节点操作：\n\n\n当前从节点取消复制，变为主节点\n执行clusterDelSlot操作撤销故障主节点负责的槽， 并执行clusterAddSlot把这些槽委派给自己\n向集群广播自己的pong消息，通知集群内所有的节点当前从节点变为乐主节点卡并接管了故障主节点的槽信息\n\n","dateCreated":"2020-06-29T19:44:32+08:00","dateModified":"2020-06-30T10:46:32+08:00","datePublished":"2020-06-29T19:44:32+08:00","description":"","headline":"redis学习笔记-redis cluster 故障恢复流程","image":["thumbnail.png","cover.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/"},"publisher":{"@type":"Organization","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"https://photos.google.com/photo/AF1QipMRiy0F-doId3BZVtny4HbYrgZ7JxujCdJPkd-N","logo":{"@type":"ImageObject","url":"https://photos.google.com/photo/AF1QipMRiy0F-doId3BZVtny4HbYrgZ7JxujCdJPkd-N"}},"url":"http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/","keywords":"cluster","thumbnailUrl":"thumbnail.png"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593499150941&di=f8e7e3f228840f9d0c8e920e3615930e&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F08f790529822720e9e8a7a957bcb0a46f21fab1d.jpg"},"articleBody":"#redis#\n\n判断节点宕机\n* 主观下线：pfail， 断开 &gt; cluster-node-timeout 默认15000ms \n* 客观下线：fail， cluster-node-timeout*2 时间内， 有超过半数节点pfail， 则标记为fail\n从节点资格检查对宕机的主节点，选择有资格切换的slave节点， 判断条件为从节点最后一次与主节点通信的时间间隔， 如果小于 cluster-node-timeoutcluster-slave-validity-factor(默认为15s10) ,那么就有资格\n\n设置从节点的延迟选举时间对所有从节点进行排序,slave priority, 每个从节点根据自己对master复制数据的offset设置选举时间， offset越大，表明复制数据越多， 选举时间越靠前，优先进行选举\n\n从节点发起选举流程从节点定时任务检测= failover_auth_time (故障选举时间) 后，发起选举流程\n\n\n\n更新配置纪元保存在clusterState.failover_auth_epoch  结构体变量里\n广播选举消息FAILOVER_AUTH_REQUEST,保证该从节点在一个配置纪元内只能发起一次选举\n\n\n主节点选举投票只有持有槽的主节点才能处理FAILOVER_AUTH_REQUEST消息， 给从节点投票。当某个从节点收集到N/2 +1 个持有槽的主节点投票时， 从节点可以执行替换故障主节点的操作。\n\n\n注意事项：1、故障节点也算在N里面，所以要注意主节点的部署分布问题，有可能从节点一直拿不到N/2+1个选票2、投票作废。 一个配置纪元代表一次选举周期，开始投票后的cluster-node-timeout*2 时间内，从节点没有获取到足够票数，则本次选举作废，从节点对配置纪元自增并发起下一轮投票  \n\n\n替换主节点收到N/2+1个选票的从节点发起替换主节点操作：\n\n\n当前从节点取消复制，变为主节点\n执行clusterDelSlot操作撤销故障主节点负责的槽， 并执行clusterAddSlot把这些槽委派给自己\n向集群广播自己的pong消息，通知集群内所有的节点当前从节点变为乐主节点卡并接管了故障主节点的槽信息\n\n","dateCreated":"2020-06-29T19:44:32+08:00","dateModified":"2020-06-30T10:46:32+08:00","datePublished":"2020-06-29T19:44:32+08:00","description":"","headline":"redis学习笔记-redis cluster 故障恢复流程","image":["thumbnail.png","cover.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/"},"publisher":{"@type":"Organization","name":"Xiao Tengkun","sameAs":["https://github.com/iushas","https://www.jianshu.com/u/17e9541e1483","mailto:hit_tanic@163.com"],"image":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593499150941&di=f8e7e3f228840f9d0c8e920e3615930e&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F08f790529822720e9e8a7a957bcb0a46f21fab1d.jpg","logo":{"@type":"ImageObject","url":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593499150941&di=f8e7e3f228840f9d0c8e920e3615930e&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F08f790529822720e9e8a7a957bcb0a46f21fab1d.jpg"}},"url":"http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/","keywords":"cluster","thumbnailUrl":"thumbnail.png"}</script>
     <meta name="description" content="#redis#  判断节点宕机 * 主观下线：pfail， 断开 &gt; cluster-node-timeout 默认15000ms  * 客观下线：fail， cluster-node-timeout*2 时间内， 有超过半数节点pfail， 则标记为fail 从节点资格检查对宕机的主节点，选择有资格切换的slave节点， 判断条件为从节点最后一次与主节点通信的时间间隔， 如果小于 clus">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="redis学习笔记-redis cluster 故障恢复流程">
@@ -39,7 +39,7 @@
         
     
     
-        <meta property="og:image" content="https://photos.google.com/photo/AF1QipMRiy0F-doId3BZVtny4HbYrgZ7JxujCdJPkd-N"/>
+        <meta property="og:image" content="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1593499150941&amp;di=f8e7e3f228840f9d0c8e920e3615930e&amp;imgtype=0&amp;src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F08f790529822720e9e8a7a957bcb0a46f21fab1d.jpg"/>
     
     
         <meta property="og:image" content="http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/thumbnail.png"/>
@@ -99,7 +99,7 @@
             >
         
         
-            <img class="header-picture" src="https://photos.google.com/photo/AF1QipMRiy0F-doId3BZVtny4HbYrgZ7JxujCdJPkd-N" alt="作者的图片"/>
+            <img class="header-picture" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1593499150941&amp;di=f8e7e3f228840f9d0c8e920e3615930e&amp;imgtype=0&amp;src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F08f790529822720e9e8a7a957bcb0a46f21fab1d.jpg" alt="作者的图片"/>
         
         </a>
     
@@ -120,7 +120,7 @@
                     href="/#about"
                     aria-label="阅读有关作者的更多信息"
                 >
-                    <img class="sidebar-profile-picture" src="https://photos.google.com/photo/AF1QipMRiy0F-doId3BZVtny4HbYrgZ7JxujCdJPkd-N" alt="作者的图片"/>
+                    <img class="sidebar-profile-picture" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1593499150941&amp;di=f8e7e3f228840f9d0c8e920e3615930e&amp;imgtype=0&amp;src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F08f790529822720e9e8a7a957bcb0a46f21fab1d.jpg" alt="作者的图片"/>
                 </a>
                 <h4 class="sidebar-profile-name">Xiao Tengkun</h4>
                 
@@ -417,7 +417,7 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="https://photos.google.com/photo/AF1QipMRiy0F-doId3BZVtny4HbYrgZ7JxujCdJPkd-N" alt="作者的图片"/>
+            <img id="about-card-picture" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1593499150941&amp;di=f8e7e3f228840f9d0c8e920e3615930e&amp;imgtype=0&amp;src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F08f790529822720e9e8a7a957bcb0a46f21fab1d.jpg" alt="作者的图片"/>
         
             <h4 id="about-card-name">Xiao Tengkun</h4>
         
