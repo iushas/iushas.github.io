@@ -44,7 +44,7 @@
     <link href="http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/"/>
     <id>http://iushas.github.io/2020/06/29/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/</id>
     <published>2020-06-29T07:33:17.000Z</published>
-    <updated>2020-06-29T09:16:23.697Z</updated>
+    <updated>2020-06-30T01:52:17.705Z</updated>
     
     <content type="html"><![CDATA[<p>#redis#</p><ol><li><p>判断节点宕机</p><pre><code>* 主观下线：pfail， 断开 &gt; cluster-node-timeout 默认15000ms * 客观下线：fail， cluster-node-timeout*2 时间内， 有超过半数节点pfail， 则标记为fail</code></pre></li><li><p>从节点资格检查<br>对宕机的主节点，选择有资格切换的slave节点， 判断条件为从节点最后一次与主节点通信的时间间隔， 如果小于 cluster-node-timeout<em>cluster-slave-validity-factor(默认为15s</em>10) ,那么就有资格</p></li><li><p>设置从节点的延迟选举时间<br>对所有从节点进行排序,slave priority, 每个从节点根据自己对master复制数据的offset设置选举时间， offset越大，表明复制数据越多， 选举时间越靠前，优先进行选举<br><img src="redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/68E07640-EC0C-4A28-AB81-9FC494E14703.png" alt=""></p></li><li><p>从节点发起选举流程<br>从节点定时任务检测= failover_auth_time (故障选举时间) 后，发起选举流程</p></li></ol><ul><li>更新配置纪元<br>保存在clusterState.failover_auth_epoch  结构体变量里</li><li>广播选举消息<br>FAILOVER_AUTH_REQUEST,保证该从节点在一个配置纪元内只能发起一次选举</li></ul><ol start="5"><li>主节点选举投票<br>只有持有槽的主节点才能处理FAILOVER_AUTH_REQUEST消息， 给从节点投票。当某个从节点收集到N/2 +1 个持有槽的主节点投票时， 从节点可以执行替换故障主节点的操作。<br><img src="redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-redis%20cluster%20%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/5DDB4A99-141D-4620-A34E-A57609C6A54F.png" alt=""><blockquote><p>注意事项：<br>1、故障节点也算在N里面，所以要注意主节点的部署分布问题，有可能从节点一直拿不到N/2+1个选票<br>2、投票作废。 一个配置纪元代表一次选举周期，开始投票后的cluster-node-timeout*2 时间内，从节点没有获取到足够票数，则本次选举作废，从节点对配置纪元自增并发起下一轮投票  </p></blockquote></li></ol><ol start="6"><li>替换主节点<br>收到N/2+1个选票的从节点发起替换主节点操作：</li></ol><ul><li>当前从节点取消复制，变为主节点</li><li>执行clusterDelSlot操作撤销故障主节点负责的槽， 并执行clusterAddSlot把这些槽委派给自己</li><li>向集群广播自己的pong消息，通知集群内所有的节点当前从节点变为乐主节点卡并接管了故障主节点的槽信息</li></ul>]]></content>
     
@@ -64,8 +64,10 @@
     
       <category term="数据库" scheme="http://iushas.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
+      <category term="redis" scheme="http://iushas.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/"/>
     
-      <category term="redis" scheme="http://iushas.github.io/tags/redis/"/>
+    
+      <category term="cluster" scheme="http://iushas.github.io/tags/cluster/"/>
     
   </entry>
   
